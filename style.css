@@ -57,13 +57,6 @@ h2 {
 }
 
 
-/* main */
-.hero-img {
-    border: 1px solid var(--accent-color);
-    border-radius: 10px;
-}
-
-
 /* footer */
 .footer {
     background-color: var(--secondary-background);
@@ -80,4 +73,52 @@ h2 {
 #copyright {
     color: var(--secondary-color);
     font-size: 0.9rem;
+}
+
+
+/* main content */
+/* Homepage */
+.hero-img {
+    border: 1px solid var(--accent-color);
+    border-radius: 10px;
+}
+
+.home-übersichts-section {
+    border-top: 1px solid var(--accent-color);
+}
+
+.home-tabellen-section {
+    border-top: 1px solid var(--accent-color);
+}
+
+
+
+
+
+/* responsive design */
+
+/* mobile hero-section */
+.hero-content {
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .hero-text h1 {
+        position: absolute;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        text-align: center;
+        z-index: 2;
+        color: var(--secondary-background);
+        font-size: 1.5rem;
+
+    }
+
+
+    .hero-img {
+        width: 100%;
+        z-index: 1;
+    }
 }
