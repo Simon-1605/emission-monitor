@@ -91,6 +91,10 @@ h2 {
     border-top: 1px solid var(--accent-color);
 }
 
+/* Tabelle */
+.tabelle-beschreibungs-content {
+    border-bottom: 1px solid var(--accent-color);
+}
 
 
 
@@ -120,5 +124,14 @@ h2 {
     .hero-img {
         width: 100%;
         z-index: 1;
+    }
+}
+
+
+/* Tabelle Filter-Button */
+
+@media (min-width: 768px) {
+    #filter-menue {
+        display: block !important;
     }
 }
