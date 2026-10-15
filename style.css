@@ -39,7 +39,7 @@ h2 {
     text-decoration: none;
 }
 
-.header-link, .footer-link {
+.header-link, .footer-link, .nav-link{
     color: var(--secondary-color);
 }
 
@@ -96,8 +96,39 @@ h2 {
     border-bottom: 1px solid var(--accent-color);
 }
 
+/* Übersichtsseite */
+.heading-uebersicht {
+    border-bottom: 1px solid var(--accent-color);
+}
 
+.erklaerung-content {
+    border-inline-start: 2px solid var(--accent-color);
+}
 
+#abschnitt-unternehmen, #abschnitt-laender {
+    border-top: 2px solid var(--accent-color)
+}
+
+#karte-emissionsreichsten-unternehmen > div,
+#karte-emissionsärmsten-unternehmen > div,
+#karte-emissionsreichsten-laender > div,
+#karte-emissionsärmsten-laender > div {
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    background-color: #ecf5eb;
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-inline-start: 2rem;
+    text-align: start;
+}
+
+#karte-emissionsreichsten-unternehmen  p,
+#karte-emissionsärmsten-unternehmen p,
+#karte-emissionsreichsten-laender p,
+#karte-emissionsärmsten-laender p {
+    margin: 0px;
+}
 
 /* responsive design */
 
@@ -133,5 +164,15 @@ h2 {
 @media (min-width: 768px) {
     #filter-menue {
         display: block !important;
+    }
+}
+
+/* Übersichtsseite */
+@media (max-width: 768px) {
+    #abschnitt-unternehmen, #abschnitt-laender {
+        border-top: 0px;
+    }
+    .erklaerung-content {
+    border-inline-start: 0px;
     }
 }
