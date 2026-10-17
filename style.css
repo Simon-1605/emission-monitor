@@ -130,7 +130,31 @@ h2 {
     margin: 0px;
 }
 
-/* responsive design */
+
+/* Über uns Seite */
+
+.möglichkeiten > div {
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    background-color: #ecf5eb;
+}
+.about-abschnitt {
+    border-top: 1px solid var(--accent-color);
+}
+
+
+ /* Datenschutzerklärung */
+.datenschutz-abschnitt {
+    border-top: 1px solid var(--accent-color);
+}
+
+
+ /* Impressum */
+.impressum-abschnitt {
+    border-top: 1px solid var(--accent-color);
+}
+
+/* responsives design */
 
 /* mobile hero-section */
 .hero-content {

@@ -128,7 +128,7 @@ if (emissionsreichstenUnternehmen !== null) {
         return b.emissionen - a.emissionen;
     });
     const datenSatzMaxU = datenSatzMaxUnternehmenKomplett.slice(0, 5);
-    kartenErstellenHöchstUnternehmen(datenSatzMaxU);
+    kartenErstellenUnternehmen(datenSatzMaxU, emissionsreichstenUnternehmen);
 };
 
 //Datensatz für emissionsärmsten Unternehmen
@@ -137,7 +137,7 @@ if (emissionsärmstenUnternehmen !== null) {
         return a.emissionen - b.emissionen;
     });
     const datenSatzMinU = datenSatzMinUnternehmenKomplett.slice(0, 5);
-    kartenErstellenÄrmstUnternehmen(datenSatzMinU);
+    kartenErstellenUnternehmen(datenSatzMinU, emissionsärmstenUnternehmen);
 };
 
 //Array für Länder und Gesamtemissionen
@@ -169,13 +169,13 @@ for (const daten of emissionsdaten) {
     };
 };
 
-//Datensatz für Emissionsreichste Länder
+//Datensatz für emissionsreichste Länder
 if (emissionsreichstenLänder !== null) {
     const datenSatzMaxLänderKomplett = länderEmissionen.sort(function(a, b) {
         return b.emissionen - a.emissionen;
     });
     const datenSatzMaxL = datenSatzMaxLänderKomplett.slice(0, 3);
-    kartenErstellenHöchstLänder(datenSatzMaxL);
+    kartenErstellenLänder(datenSatzMaxL, emissionsreichstenLänder);
 };
 
 //Datensatz für Emissionsärmste Länder
@@ -184,8 +184,9 @@ if (emissionsärmstenLänder !== null) {
         return a.emissionen - b.emissionen;
     });
     const datenSatzMinL = datenSatzMinLänderKomplett.slice(0, 3);
-    kartenErstellenÄrmstLänder(datenSatzMinL);
+    kartenErstellenLänder(datenSatzMinL, emissionsärmstenLänder);
 };
+
 
 // 3. Darstellung der Tabelle
 function tabelleAufrufen(datensatz) {
@@ -213,9 +214,10 @@ function tabelleAufrufen(datensatz) {
 
 tabelleAufrufen(emissionsdaten);
 
+
 // 4. Darstellung der Übersichtsseite
-function kartenErstellenHöchstUnternehmen(datensatz) {
-    if (emissionsreichstenUnternehmen !== null) {
+function kartenErstellenUnternehmen(datensatz, zielContainer) {
+    if (zielContainer !== null) {
         let number = 1;
         for (const daten of datensatz) {
             const container = document.createElement("div");
@@ -232,40 +234,15 @@ function kartenErstellenHöchstUnternehmen(datensatz) {
             container.appendChild(standort);
             container.appendChild(emissionsBereich);
 
-            emissionsreichstenUnternehmen.appendChild(container);
+            zielContainer.appendChild(container);
 
             number += 1;
         };
     };
 };
 
-function kartenErstellenÄrmstUnternehmen(datensatz) {
-    if (emissionsärmstenUnternehmen !== null) {
-        let number = 1;
-        for (const daten of datensatz) {
-            const container = document.createElement("div");
-            const überschrift = document.createElement("h4");
-            const standort = document.createElement("p");
-            const emissionsBereich = document.createElement("p");
-
-            überschrift.textContent = number + ". " + daten.unternehmen;
-
-            standort.textContent = "Standort: " + daten.land + ".";
-            emissionsBereich.textContent = "Jährliche Emissionen: " + daten.emissionen + "t CO2.";
-
-            container.appendChild(überschrift);
-            container.appendChild(standort);
-            container.appendChild(emissionsBereich);
-
-            emissionsärmstenUnternehmen.appendChild(container);
-
-            number += 1;
-        };
-    };
-};
-
-function kartenErstellenHöchstLänder(datensatz) {
-    if (emissionsreichstenLänder !== null) {
+function kartenErstellenLänder(datensatz, zielContainer) {
+    if (zielContainer !== null) {
         let number = 1;
         for (const daten of datensatz) {
             const container = document.createElement("div");
@@ -286,7 +263,7 @@ function kartenErstellenHöchstLänder(datensatz) {
             überschrift.textContent = number + ". " + daten.land;
             emissionsBereich.textContent = "Gesamtemissionen: " + daten.emissionen + "t CO2.";
             hauptverursacher.textContent = 
-                "Emissionreichstes Unternehmen: " + unternehmenDesLandes[0].unternehmen +
+                "Emissionsreichstes Unternehmen: " + unternehmenDesLandes[0].unternehmen +
                 " mit " + unternehmenDesLandes[0].emissionen + "t CO2/Jahr."
             ;
 
@@ -294,44 +271,7 @@ function kartenErstellenHöchstLänder(datensatz) {
             container.appendChild(emissionsBereich);
             container.appendChild(hauptverursacher);
 
-            emissionsreichstenLänder.appendChild(container);
-
-            number += 1;
-        };
-    };
-};
-
-function kartenErstellenÄrmstLänder(datensatz) {
-    if (emissionsärmstenLänder !== null) {
-        let number = 1;
-        for (const daten of datensatz) {
-            const container = document.createElement("div");
-            const überschrift = document.createElement("h4");
-            const emissionsBereich = document.createElement("p");
-            const hauptverursacher = document.createElement("p");
-
-            // Filterung
-            const unternehmenDesLandes = emissionsdaten.filter(function(unternehmen) {
-                return unternehmen.land === daten.land
-            });
-            //Sortierung
-            unternehmenDesLandes.sort(function(a, b) {
-                return b.emissionen - a.emissionen;
-            });
-
-            //Ausgabe
-            überschrift.textContent = number + ". " + daten.land;
-            emissionsBereich.textContent = "Gesamtemissionen: " + daten.emissionen + "t CO2.";
-            hauptverursacher.textContent = 
-                "Emissionreichstes Unternehmen: " + unternehmenDesLandes[0].unternehmen +
-                " mit " + unternehmenDesLandes[0].emissionen + "t CO2/Jahr."
-            ;
-            
-            container.appendChild(überschrift);
-            container.appendChild(emissionsBereich);
-            container.appendChild(hauptverursacher);
-
-            emissionsärmstenLänder.appendChild(container);
+            zielContainer.appendChild(container);
 
             number += 1;
         };
